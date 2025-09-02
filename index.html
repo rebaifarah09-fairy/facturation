@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Facture</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="invoice-wrapper">
+
+    <!-- Header -->
+    <header class="invoice-header">
+      <div class="company-info">
+        <h1><input type="text" placeholder="Nom de la société"></h1>
+        <p><input type="text" placeholder="Adresse complète"></p>
+        <p><input type="text" placeholder="Téléphone"></p>
+        <p><input type="email" placeholder="Email"></p>
+      </div>
+      <div class="invoice-meta">
+        <h2>Facture</h2>
+        <label>Référence :</label>
+        <input type="text" placeholder="FAC-2025-001">
+        <label>Date :</label>
+        <input type="date">
+      </div>
+    </header>
+
+    <!-- ====== INFOS CLIENT ====== -->
+    <section>
+      <h3>Informations Client</h3>
+      <label>Nom / Société :</label>
+      <input type="text" placeholder="Nom ou Société">
+      <label>Adresse :</label>
+      <input type="text" placeholder="Adresse complète">
+      <label>Email / Téléphone :</label>
+      <input type="text" placeholder="Email ou Téléphone">
+    </section>
+
+    <!-- ====== PRODUITS ====== -->
+    <section>
+      <h3>Produits / Services</h3>
+      <table class="facture-table">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Qté</th>
+            <th>Prix Unitaire</th>
+            <th>Total</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="product-body">
+          <tr>
+            <td><input type="text" placeholder="Produit ou service"></td>
+            <td><input type="number" placeholder="" min="0" step="1" class="qty"></td>
+            <td><input type="number" placeholder="" step="1" class="price"></td>
+            <td class="line-total">0.00</td>
+            <td><button class="btn-remove">X</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <button id="add-row" class="btn-add">+ Ajouter un produit</button>
+    </section>
+
+    <!-- ====== OPTIONS ====== -->
+    <section>
+      <h3>Paramètres de facturation</h3>
+
+      <label>TVA (%) :</label>
+      <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+        <select id="tva">
+          <option value="0">0%</option>
+          <option value="7">7%</option>
+          <option value="14">14%</option>
+          <option value="19">19%</option>
+          <option value="autre">Autre</option>
+        </select>
+        <input type="number" id="tvaCustom" placeholder="Autre TVA (%)" step="" style="display:none; max-width:180px;">
+      </div>
+
+      <label>Devise :</label>
+      <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+        <select id="devise">
+          <option value="€">(€)</option>
+          <option value="$">($)</option>
+          <option value="DT">(DT)</option>
+          <option value="Autre">Autre</option>
+        </select>
+        <input type="text" id="deviseCustom" placeholder="Autre devise (ex : DZD)" style="display:none; max-width:180px;">
+      </div>
+
+      <label>Acompte versé :</label>
+      <input type="number" id="acompte" placeholder="0.00" step="1">
+
+      <label>Mode de paiement :</label>
+      <input type="text" placeholder="Ex: Virement bancaire">
+
+      <label>Délai de règlement :</label>
+      <input type="text" placeholder="Ex: 30 jours fin de mois">
+    </section>
+
+    <!-- ====== TOTALS ====== -->
+    <div class="totals">
+      <div class="total-line"><span>Total HT :</span><span id="total-ht">0.00</span></div>
+      <div class="total-line"><span>TVA :</span><span id="total-tva">0.00</span></div>
+      <div class="total-line grand"><span>Total TTC :</span><span id="total-ttc">0.00</span></div>
+      <div class="total-line"><span>Reste à payer :</span><span id="reste">0.00</span></div>
+    </div>
+
+    <!-- ====== CONDITIONS ====== -->
+    <section>
+      <h3>Conditions Générales</h3>
+      <textarea placeholder="Ex: En cas de retard de paiement, des pénalités seront appliquées..."></textarea>
+    </section>
+
+    <!-- ====== SIGNATURES ====== -->
+<section class="signatures">
+  <h3>Signatures</h3>
+  <table class="signatures-table">
+    <tr>
+      <td>
+        <p>Signature du client</p>
+        <div class="signature-box"></div>
+      </td>
+      <td style="text-align: right;">
+        <p>Signature et cachet de l’entreprise</p>
+        <div class="signature-box"></div>
+      </td>
+    </tr>
+  </table>
+</section>
+
+
+    <!-- ====== ACTIONS ====== -->
+    <div class="actions">
+      <button class="btn-print" onclick="window.print()">🖨️ Imprimer la facture</button>
+    </div>
+
+  </div>
+</body>
+</html>
